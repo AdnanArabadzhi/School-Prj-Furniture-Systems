@@ -1,7 +1,25 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+// Components
+import { HomeComponent } from './home/home.component';
+import { SigninComponent } from './authentication/signin/signin.component';
+import { SignupComponent } from './authentication/signup/signup.component';
+import { CreateFurnitureComponent } from './furniture/create-furniture/create-furniture.component';
+import { AuthService } from './authentication/auth.service';
+import { AuthGuard } from './authentication/guards/auth.guard';
+import { FurnitureAllComponent } from './furniture/furniture-all/furniture-all.component';
+import { FurnitureDetailsComponent } from './furniture/furniture-details/furniture-details.component';
+import { FurnitureUserComponent } from './furniture/furniture-user/furniture-user.component';
+
+
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomeComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'furniture', loadChildren: './furniture/furniture/furniture.module#FurnitureModule', canActivate: [AuthGuard] }
+  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
